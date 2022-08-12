@@ -12,13 +12,16 @@ router.post("/", (req, res, next) => {
     },
   ];
 
+  const { email, password } = req.body;
+
   let user = users.find(
-    (usr) => usr.email == req.body.email && usr.password == req.body.password
-  )[0];
-  console.log(user);
+    (usr) => usr.email == email && usr.password == password
+  );
+
   if (user == undefined)
     return res.send({ status: 403, message: "User/Passord incorrect!" });
-  let token = tokens.find((obj) => obj.id == user.id)[0];
+
+  let token = tokens.find((obj) => obj.id == user.id);
   res.send({
     status: 200,
     token,
