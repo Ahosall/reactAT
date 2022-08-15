@@ -5,8 +5,8 @@ import OtherRoutes from "./OtherRoutes";
 
 const Routes = () => {
   const { signed, user } = useAuth();
-  console.log(signed, user);
-  return signed ? <OtherRoutes /> : <SignRoutes />;
+
+  return signed ? <OtherRoutes user={user} /> : <SignRoutes />;
 };
 
 export default Routes;

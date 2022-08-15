@@ -5,11 +5,9 @@ const Navbar = (props: any) => {
         <span>React AT</span>
       </div>
       <div className="nav-items">
-        {!props.logged ? (
-          <div className="nav-item">
-            <span>Login</span>
-          </div>
-        ) : null}
+        <div className="nav-item">
+          <span>{props.user.name}</span>
+        </div>
       </div>
     </nav>
   );
