@@ -1,0 +1,44 @@
+.work {}
+
+.header {}
+
+.title {}
+
+.content {
+    margin-top: 15px;
+}
+
+.content .card {
+    position: relative;
+    max-width: 140px;
+}
+
+.card-image {
+    height: 210px;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    background-size: cover;
+    background-position-x: center;
+
+    box-shadow: rgba(0, 0, 0, 0.95) 0px -60px 36px -28px inset;
+
+    cursor: pointer;
+
+    transition: all 450ms ease;
+}
+
+.card-image:hover {
+    box-shadow: rgba(0, 0, 0, 0.95) 0px -120px 36px -28px inset;
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+}
+
+.work-title {}
+
+.work-genres {}

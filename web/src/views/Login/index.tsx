@@ -14,7 +14,7 @@ const Login = () => {
 
     const el = e.target.elements;
     const user = {
-      email: el.email.value,
+      login: el.login.value,
       password: el.password.value,
     };
 
@@ -31,15 +31,19 @@ const Login = () => {
       <div className="login">
         <div className="card">
           <div className="card-header">
-            <h2 className="login-title">Login</h2>
+            <h2 className="login-title">Entrar</h2>
           </div>
           <div className="card-content">
-            <form onSubmit={handleLogin} className="login-form">
+            <form
+              onSubmit={handleLogin}
+              autoComplete="off"
+              className="login-form"
+            >
               <input
                 className="form-input"
-                type="email"
-                name="email"
-                placeholder="E-Mail"
+                type="text"
+                name="login"
+                placeholder="Usuário"
                 autoFocus
                 required
               />
@@ -50,8 +54,17 @@ const Login = () => {
                 placeholder="Senha"
                 required
               />
-              <input className="form-submit" type="submit" value="Login" />
+              <input className="form-submit" type="submit" value="Entrar" />
             </form>
+          </div>
+          <div className="card-footer">
+            <span>
+              Não possuí uma conta?{" "}
+              <a className="link" href="/register">
+                Criar conta
+              </a>
+              .
+            </span>
           </div>
         </div>
       </div>

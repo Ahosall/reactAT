@@ -19,6 +19,15 @@ code {
     monospace;
 }
 
+.link {
+  color: rgb(108, 108, 213);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgb(79, 79, 172);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;

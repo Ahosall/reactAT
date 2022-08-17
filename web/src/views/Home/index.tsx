@@ -1,17 +1,33 @@
-import { useAuth } from "../../contexts/auth";
+import Work from "../../components/Work";
+
+import "./style.css";
 
 const Home = () => {
-  const { Logout } = useAuth();
-
-  const handleLogout = () => {
-    Logout();
-  };
-
+  let works = [
+    {
+      title: "Manhwas",
+      works: [
+        {
+          image:
+            "https://images-na.ssl-images-amazon.com/images/I/816QF6MMSrL.jpg",
+          name: "Solo Leveling",
+          genres: ["Sci-Fi"],
+        },
+      ],
+    },
+  ];
   return (
-    <>
-      <h1>Hello, World!</h1>
-      <button onClick={handleLogout}>Logout</button>
-    </>
+    <div className="home">
+      <div className="annoucements">
+        <div className="header"></div>
+      </div>
+
+      <div className="contents">
+        {works.map((w) => (
+          <Work title={w.title} works={w.works} />
+        ))}
+      </div>
+    </div>
   );
 };
 

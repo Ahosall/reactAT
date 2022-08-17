@@ -6,17 +6,18 @@ let tokens = [{ id: 1, token: "AKSJbhdkajnskljhndasd.akskdoncc54653" }];
 let users = [
   {
     id: 1,
-    name: "Ahosall",
+    name: "Felipe T. R.",
+    login: "Ahos.All",
     email: "ahosall@email.com",
     password: "123456",
   },
 ];
 
 router.post("/login", (req, res, next) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
 
   let user = users.find(
-    (usr) => usr.email == email && usr.password == password
+    (usr) => usr.login == login && usr.password == password
   );
 
   if (user == undefined)

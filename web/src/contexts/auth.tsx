@@ -4,13 +4,14 @@ import { createContext, useState } from "react";
 import api from "../services/api";
 
 interface IUserLogin {
-  email: string;
+  login: string;
   password: string;
 }
 
 interface iUserResponse {
   id: string;
   name: string;
+  login: string;
   email: string;
   password: string;
 }
