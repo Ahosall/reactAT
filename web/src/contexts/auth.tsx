@@ -1,32 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { createContext, useState } from "react";
+import React, { useContext, createContext, useEffect, useState } from "react";
+
+import { IAuthContextData, IUserLogin, IUserResponse } from "../utils/types";
 
 import api from "../services/api";
 
-interface IUserLogin {
-  login: string;
-  password: string;
-}
-
-interface iUserResponse {
-  id: string;
-  name: string;
-  login: string;
-  email: string;
-  password: string;
-}
-
-interface IAuthContextData {
-  signed: boolean;
-  user: object | null;
-  Login(user: IUserLogin): Promise<string>;
-  Logout(): void;
-}
-
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
-
 export const AuthProvider = ({ children }: any) => {
-  const [user, setUser] = useState<iUserResponse | null>(null);
+  const [user, setUser] = useState<IUserResponse | null>(null);
 
   useEffect(() => {
     const storagedUser = localStorage.getItem("@App:user");
@@ -35,7 +15,6 @@ export const AuthProvider = ({ children }: any) => {
     if (storagedToken && storagedUser) {
       (async () => {
         const lsUser = JSON.parse(storagedUser);
-
         const response = await api.get(
           `/auth/?auth=${storagedToken}&user=${lsUser.id}`
         );
@@ -59,9 +38,9 @@ export const AuthProvider = ({ children }: any) => {
       localStorage.setItem("@App:user", JSON.stringify(response.data.user));
       localStorage.setItem("@App:token", response.data.token);
 
-      return "User logged!";
+      return { status: 200, message: "User logged!" };
     } else if (response.data.status === 403) {
-      return response.data.message;
+      return response.data;
     }
   };
 
@@ -74,6 +53,8 @@ export const AuthProvider = ({ children }: any) => {
 
     localStorage.removeItem("@App:user");
     localStorage.removeItem("@App:token");
+
+    window.location.href = "/";
   };
 
   return (

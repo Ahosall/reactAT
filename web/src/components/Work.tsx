@@ -1,39 +1,35 @@
-import "./Work.css";
+import { Grid, Card, CardContent, Typography } from "@mui/material";
 
-type TWorks = {
-  image: string;
-  name: string;
-  genres: Array<string>;
-};
+import WorkItem from "./workItem";
+
+import { IWorkResponse } from "../utils/types";
 
 interface IWork {
   title: string;
-  works: Array<TWorks>;
+  works: Array<IWorkResponse>;
 }
 
-const Work = (props: IWork) => {
+const Work = ({ title, works }: IWork) => {
   return (
-    <div className="work">
-      <div className="header">
-        <h3 className="title">{props.title}</h3>
-      </div>
-      <div className="content">
-        {props.works.map((work, i) => (
-          <div key={i} className="card">
-            <div
-              className="card-image"
-              style={{ backgroundImage: `url(${work.image})` }}
-            ></div>
-            <div className="card-info">
-              <p className="work-title">{work.name}</p>
-              {work.genres.map((genres) => (
-                <span className="work-genres">{genres}</span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Card sx={{ mb: 2 }} color="secondary">
+      <CardContent>
+        <Typography variant="h5" component="div" margin="normal">
+          {title}
+        </Typography>
+        <Grid
+          sx={{ my: 2 }}
+          container
+          spacing={2}
+          columnSpacing={{ sm: 2, xs: 2 }}
+        >
+          {works.map((work: IWorkResponse, i) => (
+            <Grid item xl={2} lg={2} md={2} xs={6}>
+              <WorkItem key={i} work={work} />
+            </Grid>
+          ))}
+        </Grid>
+      </CardContent>
+    </Card>
   );
 };
 

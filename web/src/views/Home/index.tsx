@@ -1,33 +1,42 @@
-import Work from "../../components/Work";
+import { useEffect, useState } from "react";
+import { Grid, Container } from "@mui/material";
 
-import "./style.css";
+import Work from "./../../components/work";
+import Announcements from "./../../components/announcements";
+import { IWorksResponse } from "../../utils/types";
+
+import api from "../../services/api";
 
 const Home = () => {
-  let works = [
-    {
-      title: "Manhwas",
-      works: [
-        {
-          image:
-            "https://images-na.ssl-images-amazon.com/images/I/816QF6MMSrL.jpg",
-          name: "Solo Leveling",
-          genres: ["Sci-Fi"],
-        },
-      ],
-    },
-  ];
-  return (
-    <div className="home">
-      <div className="annoucements">
-        <div className="header"></div>
-      </div>
+  const [works, setWorks] = useState<IWorksResponse | null>(null);
 
-      <div className="contents">
-        {works.map((w) => (
-          <Work title={w.title} works={w.works} />
-        ))}
-      </div>
-    </div>
+  useEffect(() => {
+    (async () => {
+      const response = await api.get(`/works/`);
+
+      if (response.data.status == 404) return (window.location.href = "/404");
+      setWorks(response.data.works);
+    })();
+  }, []);
+
+  return (
+    <Container>
+      <Grid sx={{ my: 2 }} container spacing={2}>
+        <Grid item xs={12}>
+          <Announcements
+            title={"Teste"}
+            message={
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. In quidem numquam hic modi sit? Esse exercitationem recusandae deleniti a similique delectus sunt illo omnis quo, nihil magni qui soluta veritatis?"
+            }
+          />
+        </Grid>
+        <Grid item xs={12}>
+          {works?.map((w, i) => (
+            <Work key={i} title={w.title} works={w.works} />
+          ))}
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
